@@ -13,21 +13,6 @@ class HouseholderController extends Controller
         $this->middleware('auth');
     }
 
-    public function APIListagem(Datatables $datatables)
-    {
-        $builder = Householder::query()->select('nome', 'nascimento', 'profissao', 'escolaridade','cidade');
-
-        return $datatables->eloquent($builder)
-                          ->editColumn('name', function ($user) {
-                              return '<a>' . $user->name . '</a>';
-                          })
-                          ->rawColumns([1, 6])
-                          ->make();
-    }
-
-    public function APIListagem2(){
-        return Datatables::of(Householder::query())->make(true);     
-    }
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +20,8 @@ class HouseholderController extends Controller
      */
     public function index()
     {
-        return view('householder.index');
+        $householders = Householder::orderBy('nome')->paginate(10);
+        return view('householder.index', compact('householders'));
     }
 
     /**
@@ -67,7 +53,9 @@ class HouseholderController extends Controller
      */
     public function show($id)
     {
-        //
+        $householder = Householder::find($id);
+        return view('householder.show', compact('householder'));
+
     }
 
     /**

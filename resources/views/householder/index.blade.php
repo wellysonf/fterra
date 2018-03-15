@@ -7,7 +7,12 @@
 @stop
 
 @section('content')
-    <table id="listagem_familias"  class="table table-bordered">
+    <div class="row">
+        <div class="container">
+            <a href="{{route('familia.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar</a>
+        </div>
+    </div>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -15,19 +20,21 @@
                 <th>Profissão</th>
                 <th>Escolaridade</th>
                 <th>Cidade</th>
+                <th></th>
             </tr>
         </thead>
+        <tbody>
+            @foreach ($householders as $householder)
+            <tr>
+                <td>{{ $householder->nome }}</td>
+                <td>{{ $householder->nascimento }}</td>
+                <td>{{ $householder->profissao }}</td>
+                <td>{{ $householder->escolaridade }}</td>
+                <td>{{ $householder->cidade }}</td>
+                <td><a href="{{ route('familia.show', $householder) }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+            </tr>
+            @endforeach
+        </tbody>
     </table>
-@stop
-
-@section('adminlte_js')
-<script>
-    $(function() {
-        $('#listagem_familias').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{!! route('api_datatable') !!}'
-        });
-    });
-    </script>
+    {{ $householders->links() }}
 @stop
