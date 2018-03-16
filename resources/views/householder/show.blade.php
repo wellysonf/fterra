@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>{{ $householder->id }} - {{ $householder->nome }}</h1>
+    <h3><a href="{{route('familia.edit',$householder->id)}}" class="btn btn-warning">Editar</a></h3>
 @stop
 
 @section('content')

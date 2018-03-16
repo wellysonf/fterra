@@ -31,7 +31,7 @@ class HouseholderController extends Controller
      */
     public function create()
     {
-        //
+        return view('householder.create');
     }
 
     /**
@@ -42,7 +42,12 @@ class HouseholderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $insert = Householder::create($data);
+        if ( $insert ) {
+            return redirect()->route('familia.index');
+        }
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -66,7 +71,8 @@ class HouseholderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $householder = Householder::find($id);
+        return view('householder.create', compact('householder'));
     }
 
     /**
