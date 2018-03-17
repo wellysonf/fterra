@@ -20,7 +20,7 @@ class HouseholderController extends Controller
      */
     public function index()
     {
-        $householders = Householder::orderBy('nome')->paginate(10);
+        $householders = Householder::orderBy('nome')->get();
         return view('householder.index', compact('householders'));
     }
 
@@ -31,7 +31,8 @@ class HouseholderController extends Controller
      */
     public function create()
     {
-        return view('householder.create');
+        $mode = 'create';
+        return view('householder.create', compact('mode'));
     }
 
     /**
@@ -59,7 +60,8 @@ class HouseholderController extends Controller
     public function show($id)
     {
         $householder = Householder::find($id);
-        return view('householder.show', compact('householder'));
+        $mode = 'show';
+        return view('householder.create', compact('householder','mode'));
 
     }
 
@@ -72,7 +74,8 @@ class HouseholderController extends Controller
     public function edit($id)
     {
         $householder = Householder::find($id);
-        return view('householder.create', compact('householder'));
+        $mode = 'edit';
+        return view('householder.create', compact('householder','mode'));
     }
 
     /**
@@ -84,7 +87,13 @@ class HouseholderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $householder = Householder::find($id);
+        $insert = $householder->update($data);
+        if ( $insert ) {
+            return redirect()->back();
+        }
+        return redirect()->back()->withInput();
     }
 
     /**

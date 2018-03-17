@@ -10,9 +10,11 @@
     <div class="row">
         <div class="container">
             <a href="{{route('familia.create')}}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar</a>
+            <br>
         </div>
     </div>
-    <table class="table table-bordered">
+    <br>
+    <table class="table table-bordered" id="listagem_inicial">
         <thead>
             <tr>
                 <th>Nome</th>
@@ -27,7 +29,7 @@
             @foreach ($householders as $householder)
             <tr>
                 <td>{{ $householder->nome }}</td>
-                <td>{{ $householder->nascimento }}</td>
+                <td>{{ \Carbon\Carbon::parse($householder->nascimento)->format('d/m/Y') }}</td>
                 <td>{{ $householder->profissao }}</td>
                 <td>{{ $householder->escolaridade }}</td>
                 <td>{{ $householder->cidade }}</td>
@@ -36,5 +38,35 @@
             @endforeach
         </tbody>
     </table>
-    {{ $householders->links() }}
+@stop
+
+@section('js')
+<script>
+$(document).ready( function () {
+    $('#listagem_inicial').DataTable({
+        language: {
+            processing:     "Processando...",
+            search:         "Buscar&nbsp;:",
+            lengthMenu:     "Mostrando _MENU_ registros por pagina",
+            info:           "Exibindo do registro _START_ até _END_ de _TOTAL_ total de registros",
+            infoEmpty:      "Exibindo do registro 0 até 0 de 0 total de registros",
+            infoFiltered:   "(Filtrado de _MAX_ registros totais)",
+            infoPostFix:    "",
+            loadingRecords: "Carregando...",
+            zeroRecords:    "Nada achado - desculpe",
+            emptyTable:     "Tabela ainda não preenchida",
+            paginate: {
+                first:      "Primeiro",
+                previous:   "Anterior",
+                next:       "Proximo",
+                last:       "Ultimo"
+            },
+            aria: {
+                sortAscending:  ": Ordenar de forma Crescente",
+                sortDescending: ": Ordenar de forma Decrescente"
+            }
+        }
+    });
+} );
+</script>
 @stop

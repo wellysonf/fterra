@@ -93,7 +93,7 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    'register_url' => 'login',
 
     /*
     |--------------------------------------------------------------------------
@@ -114,21 +114,14 @@ return [
             'icon'        => 'users',
             'route'  => 'familia.index',
         ],
+        'CONFIGURAÇÕES',
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
-            'label_color' => 'success',
-        ],
-        'ACCOUNT SETTINGS',
-        [
-            'text' => 'Profile',
+            'text' => 'Usuários',
             'url'  => 'admin/settings',
             'icon' => 'user',
         ],
         [
-            'text' => 'Change Password',
+            'text' => 'Password',
             'url'  => 'admin/settings',
             'icon' => 'lock',
         ],
