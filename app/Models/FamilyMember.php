@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class FamilyMember extends Model
 {
     protected $fillable = [
-        'id_householder',
+        'householder_id',
         'nome',
         'nascimento',
         'cpf',

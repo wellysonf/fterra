@@ -3,16 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Householder;
-use Yajra\Datatables\Datatables;
+use App\Models\FamilyMember;
 
-class HouseholderController extends Controller
+class FamilyMemberController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +14,7 @@ class HouseholderController extends Controller
      */
     public function index()
     {
-        $householders = Householder::orderBy('nome')->get();
-        return view('householder.index', compact('householders'));
+        // 
     }
 
     /**
@@ -31,8 +24,7 @@ class HouseholderController extends Controller
      */
     public function create()
     {
-        $mode = 'create';
-        return view('householder.create', compact('mode'));
+        //
     }
 
     /**
@@ -44,9 +36,10 @@ class HouseholderController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $insert = Householder::create($data);
+        $householder = $request->householder_id;
+        $insert = FamilyMember::create($data);
         if ( $insert ) {
-            return redirect()->route('familia.index');
+            return redirect()->route('familia.edit',$householder);
         }
         return redirect()->back()->withInput();
     }
@@ -59,9 +52,9 @@ class HouseholderController extends Controller
      */
     public function show($id)
     {
-        $householder = Householder::find($id);
+        $familymember = FamilyMember::find($id);
         $mode = 'show';
-        return view('householder.create', compact('householder','mode'));
+        return view('familymember.form', compact('familymember','mode'));
 
     }
 
@@ -73,9 +66,7 @@ class HouseholderController extends Controller
      */
     public function edit($id)
     {
-        $householder = Householder::with('members')->find($id);
-        $mode = 'edit';
-        return view('householder.create', compact('householder','mode'));
+        //
     }
 
     /**
@@ -88,10 +79,11 @@ class HouseholderController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        $householder = Householder::find($id);
-        $insert = $householder->update($data);
+        $familymember = FamilyMember::find($id);
+        $insert = $familymember->update($data);
+        $householder = $familymember->householder_id;
         if ( $insert ) {
-            return redirect()->back();
+            return redirect()->route('familia.edit',$householder);
         }
         return redirect()->back()->withInput();
     }
@@ -105,5 +97,11 @@ class HouseholderController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function add($id)
+    {
+        $mode = 'create';
+        $householder = $id;
+        return view('familymember.form', compact('mode','householder'));
     }
 }

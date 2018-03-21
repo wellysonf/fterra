@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateFamilyMembersTable extends Migration
-{
+{ 
     /**
      * Run the migrations.
      *
@@ -15,7 +15,7 @@ class CreateFamilyMembersTable extends Migration
     {
         Schema::create('family_members', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_householder');
+            $table->integer('householder_id')->unsigned();;
             $table->string('nome');
             $table->date('nascimento');
             $table->string('cpf');
@@ -24,6 +24,7 @@ class CreateFamilyMembersTable extends Migration
             $table->string('escolaridade');
             $table->float('renda');
             $table->timestamps();
+            $table->foreign('householder_id')->references('id')->on('householders')->onUpdate('cascade')->onDelete('restrict');
         });
     }
 

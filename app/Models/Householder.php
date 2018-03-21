@@ -33,4 +33,9 @@ class Householder extends Model
         'renda_per_capita',
         'obs',
     ];
+
+    public function members()
+	{
+		return $this->hasMany('App\Models\FamilyMember');
+    }
 }

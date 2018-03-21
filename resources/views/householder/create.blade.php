@@ -9,9 +9,9 @@
 @section('content')
 
 @if($mode === 'create')
-<form action="{{ route('familia.store') }}" method="post">
+<form action="{{ route('familia.store') }}" method="post" class="form-inline" id="form_chefe">
 @elseif (($mode === 'show')or($mode === 'edit'))
-<form action="{{ route('familia.update',$householder) }}" method="post">
+<form action="{{ route('familia.update',$householder) }}" method="post" class="form-inline" id="form_chefe">
 {{ method_field('PUT') }}
 @endif
     {{ csrf_field() }}
@@ -56,11 +56,39 @@
     <div class='form-group'><label for='renda_per_capita'>RENDA PER CAPITA </label><input type='text' class='form-control  has-feedback {{ $errors->has('renda_per_capita') ? 'has-error' : '' }}' name='renda_per_capita' value='{{ $householder->renda_per_capita or old('renda_per_capita') }}'></div>
     <div class='form-group'><label for='obs'>OBSERVAÇÕES: </label><input type='text' class='form-control  has-feedback {{ $errors->has('obs') ? 'has-error' : '' }}' name='obs' value='{{ $householder->obs or old('obs') }}'></div>   
     <br>
+    <br>
     @if($mode === 'create')
-    <input type="submit" value="Adicionar" class="btn btn-primary">
+    <input type="submit" value="Adicionar Chefe de familia" class="btn btn-primary">
     @elseif (($mode === 'show')or($mode === 'edit'))
-    <input type="submit" value="Editar" class="btn btn-primary">
+    <input type="submit" value="Editar Chefe de Familia" class="btn btn-primary">
     @endif   
 </form>
-
+@if (($mode === 'show')or($mode === 'edit'))
+<h2>Lista de membros da familia</h2>
+<a href="{{route('membro.add', $householder->id)}}" class="btn btn-primary"><i class="fa fa-plus"></i> Adicionar</a>
+    <table class="table">
+        <thead>
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>Parentesco</th>
+            <th>Profissão</th>
+            <th>Escolaridade</th>
+            <th>Renda</th>
+            <th></th>
+        </thead>
+        <tbody>
+        @foreach ($householder->members as $member)
+            <tr>
+                <td>{{ $member->nome }}</td>
+                <td>{{ \Carbon\Carbon::parse($member->nascimento)->format('d/m/Y') }}</td>
+                <td>{{ $member->parentesco }}</td>
+                <td>{{ $member->profissao }}</td>
+                <td>{{ $member->escolaridade }}</td>
+                <td>{{ $member->renda }}</td>
+                <td><a href="{{ route('membro.show', $member) }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    @endif   
 @stop

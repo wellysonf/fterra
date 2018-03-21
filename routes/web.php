@@ -19,5 +19,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('familia','HouseholderController');
+Route::resource('familia/membro','FamilyMemberController');
+Route::get('familia/membro/add/{id}','FamilyMemberController@add')->name('membro.add');
 
-Route::get('/familia/api','HouseholderController@APIListagem')->name('api_datatable');
+//Route::get('/familia/api','HouseholderController@APIListagem')->name('api_datatable');

@@ -9,7 +9,7 @@ $factory->define(App\Models\Householder::class, function (Faker $faker) {
         'nascimento'  => $faker->date('Y-m-d','now'),
         'rg'  => $faker->randomNumber(5),
         'cpf'  => $faker->randomNumber(5),
-        'escolaridade'  => $faker->randomElement(array('Fundamental','Medio','Superior','Especialização')),
+        'escolaridade'  => $faker->randomElement(array('Fundamental Completo','Médio Completo','Superior Incompleto','Superior Completo','Pós-graduação (Lato senso) Completo')),
         'profissao'  => $faker->jobTitle,
         'conjuge'  => $faker->name,
         'pai'  => $faker->name,

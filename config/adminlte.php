@@ -108,13 +108,13 @@ return [
     */
 
     'menu' => [
-        'MAIN NAVIGATION',
+        'NAVEGAÇÃO PRINCIPAL',
         [
             'text' => 'Chefes de familia',
             'icon'        => 'users',
             'route'  => 'familia.index',
         ],
-        'CONFIGURAÇÕES',
+        /* 'CONFIGURAÇÕES',
         [
             'text' => 'Usuários',
             'url'  => 'admin/settings',
@@ -124,7 +124,7 @@ return [
             'text' => 'Password',
             'url'  => 'admin/settings',
             'icon' => 'lock',
-        ],
+        ], */
     ],
 
     /*

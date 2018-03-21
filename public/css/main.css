@@ -2,3 +2,15 @@
     font-weight: bold;
     
 }
+#form_chefe{
+    margin: 2em 0;
+}
+#form_chefe input:submit{
+    margin: 3em 0;
+}
+#form_chefe .form-group{
+    margin: 0.3em 2em;
+}
+#form_chefe .form-group label{
+    margin-right:2em;
+}
