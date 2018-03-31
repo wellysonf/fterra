@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class SocioeconomicRegister extends Model
 {
     protected $fillable = [
-        'id_householder',
+        'householder_id',
         'beneficiario',
         'programas',
         'beneficiario_fterra',

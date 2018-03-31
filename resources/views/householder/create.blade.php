@@ -11,6 +11,7 @@
 @if($mode === 'create')
 <form action="{{ route('familia.store') }}" method="post" class="form-inline" id="form_chefe">
 @elseif (($mode === 'show')or($mode === 'edit'))
+<a href="{{ route('cadsocio.add', $householder) }}" class="btn btn-info">Cadastro Sócioeconômico</a>
 <form action="{{ route('familia.update',$householder) }}" method="post" class="form-inline" id="form_chefe">
 {{ method_field('PUT') }}
 @endif
