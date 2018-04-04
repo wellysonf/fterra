@@ -75,7 +75,13 @@ class SocioeconomicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $socioeconomicregister = SocioeconomicRegister::find($id);
+        $insert = $socioeconomicregister->update($data);
+        if ( $insert ) {
+            return redirect()->route('familia.edit',$socioeconomicregister->householder_id);
+        }
+        return redirect()->back()->withInput();
     }
 
     /**
@@ -90,8 +96,15 @@ class SocioeconomicController extends Controller
     }
     public function add($id)
     {
-        $mode = 'create';
+        $socioeconomic = SocioeconomicRegister::where('householder_id',$id)->first();
         $householder = $id;
-        return view('socioeconomic.create', compact('mode','householder'));
+        if(is_null($socioeconomic)){
+            $mode = 'create';
+            return view('socioeconomic.create', compact('mode','householder'));
+        }else{
+            $mode = 'edit';
+            return view('socioeconomic.create', compact('mode','householder','socioeconomic'));
+        }
+        
     }
 }

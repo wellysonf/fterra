@@ -16,13 +16,13 @@ class CreateSocioeconomicRegistersTable extends Migration
         Schema::create('socioeconomic_registers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('householder_id');
-            $table->boolean('beneficiario')->default(FALSE);
+            $table->string('beneficiario')->default(FALSE);
             $table->string('programas');
-            $table->boolean('beneficiario_fterra')->default(FALSE);
+            $table->string('beneficiario_fterra')->default(FALSE);
             $table->string('beneficiario_fterra_desc');
             $table->string('moradia');
             $table->string('tipo_domicilio');
-            $table->integer('qtd_comodos');
+            $table->string('qtd_comodos');
             $table->string('obs_moradia')->nullable();
             $table->string('material_moradia');
             $table->string('material_moradia_cobertura');
